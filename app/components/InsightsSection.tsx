@@ -1,12 +1,12 @@
 // components/InsightsSection.tsx
 
-import React from 'react';
-import Link from 'next/link';
-import { 
+import React from "react";
+import Link from "next/link";
+import {
   FaCalendarAlt, // Card date icon
-  FaArrowRight,  // Read More icon
-  FaBookOpen     // View All icon (example)
-} from 'react-icons/fa';
+  FaArrowRight, // Read More icon
+  FaBookOpen, // View All icon (example)
+} from "react-icons/fa";
 
 // Har insight card ke data ke liye type
 type InsightCardData = {
@@ -21,45 +21,47 @@ type InsightCardData = {
 // Insights ka data
 const insights: InsightCardData[] = [
   {
-    date: 'March 15, 2024',
-    category: 'Industry Insights',
-    title: 'Future of Pharmaceutical Manufacturing: Trends and Innovations',
-    description: 'Exploring emerging technologies and methodologies shaping the future of pharmaceutical production and quality control.',
-    href: '/insights/future-of-pharma',
-    categoryColor: 'text-red-600',
+    date: "March 15, 2024",
+    category: "Industry Insights",
+    title: "Future of Pharmaceutical Manufacturing: Trends and Innovations",
+    description:
+      "Exploring emerging technologies and methodologies shaping the future of pharmaceutical production and quality control.",
+    href: "/insights/future-of-pharma",
+    categoryColor: "text-red-600",
   },
   {
-    date: 'March 10, 2024',
-    category: 'Regulatory',
-    title: 'Regulatory Compliance in Global Markets: A Comprehensive Guide',
-    description: 'Understanding the complex landscape of international pharmaceutical regulations and compliance requirements.',
-    href: '/insights/regulatory-compliance',
-    categoryColor: 'text-red-600',
+    date: "March 10, 2024",
+    category: "Regulatory",
+    title: "Regulatory Compliance in Global Markets: A Comprehensive Guide",
+    description:
+      "Understanding the complex landscape of international pharmaceutical regulations and compliance requirements.",
+    href: "/insights/regulatory-compliance",
+    categoryColor: "text-red-600",
   },
   {
-    date: 'March 5, 2024',
-    category: 'Sustainability',
-    title: 'Sustainable Practices in Pharmaceutical Manufacturing',
-    description: 'How environmentally conscious manufacturing processes are becoming essential for modern pharmaceutical companies.',
-    href: '/insights/sustainability',
-    categoryColor: 'text-red-600',
+    date: "March 5, 2024",
+    category: "Sustainability",
+    title: "Sustainable Practices in Pharmaceutical Manufacturing",
+    description:
+      "How environmentally conscious manufacturing processes are becoming essential for modern pharmaceutical companies.",
+    href: "/insights/sustainability",
+    categoryColor: "text-red-600",
   },
 ];
 
 // Main Component
 const InsightsSection: React.FC = () => {
   return (
-    <section className="bg-gray-50 py-16 sm:py-24">
+    <section id="blogs" className="bg-gray-50 py-16 sm:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
           <h2 className="text-4xl font-extrabold text-gray-900 sm:text-5xl">
             Latest Insights & Knowledge
           </h2>
           <p className="mt-4 text-lg text-gray-600">
-            Stay informed with our latest research findings, industry insights, and expert 
-            perspectives on pharmaceutical manufacturing.
+            Stay informed with our latest research findings, industry insights,
+            and expert perspectives on pharmaceutical manufacturing.
           </p>
         </div>
 
@@ -105,13 +107,14 @@ const InsightCard: React.FC<InsightCardData> = ({
   title,
   description,
   href,
-  categoryColor
+  categoryColor,
 }) => {
   return (
-    <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-6
+    <div
+      className="bg-white rounded-lg shadow-lg border border-gray-200 p-6
                     flex flex-col h-full
-                    transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-      
+                    transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+    >
       {/* Card Metadata */}
       <div className="flex items-center text-sm text-gray-500 mb-4">
         <FaCalendarAlt className="h-4 w-4 mr-1.5" />
@@ -127,9 +130,7 @@ const InsightCard: React.FC<InsightCardData> = ({
             {title}
           </h3>
         </Link>
-        <p className="mt-3 text-base text-gray-600">
-          {description}
-        </p>
+        <p className="mt-3 text-base text-gray-600">{description}</p>
       </div>
 
       {/* Read More Link */}

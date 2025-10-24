@@ -1,14 +1,14 @@
 // components/RnDSection.tsx
 
-import React from 'react';
-import Link from 'next/link';
-import Image from 'next/image'; // Next.js Image component ka istemal behtar optimization ke liye
-import { 
-  FaMicroscope, 
-  FaFileMedicalAlt, 
+import React from "react";
+import Link from "next/link";
+import Image from "next/image"; // Next.js Image component ka istemal behtar optimization ke liye
+import {
+  FaMicroscope,
+  FaFileMedicalAlt,
   FaCogs,
-  FaArrowRight
-} from 'react-icons/fa';
+  FaArrowRight,
+} from "react-icons/fa";
 
 // Har feature item ke data ke liye type
 type FeatureItem = {
@@ -22,33 +22,32 @@ type FeatureItem = {
 const features: FeatureItem[] = [
   {
     icon: FaMicroscope,
-    title: 'Advanced Analytics',
-    description: 'Cutting-edge analytical methods and quality control systems',
-    bgColor: 'bg-blue-800',
+    title: "Advanced Analytics",
+    description: "Cutting-edge analytical methods and quality control systems",
+    bgColor: "bg-blue-800",
   },
   {
     icon: FaFileMedicalAlt,
-    title: 'Formulation Development',
-    description: 'Expert formulation science for complex drug delivery systems',
-    bgColor: 'bg-red-600',
+    title: "Formulation Development",
+    description: "Expert formulation science for complex drug delivery systems",
+    bgColor: "bg-red-600",
   },
   {
     icon: FaCogs,
-    title: 'Process Innovation',
-    description: 'Continuous improvement in manufacturing processes and efficiency',
-    bgColor: 'bg-blue-800',
+    title: "Process Innovation",
+    description:
+      "Continuous improvement in manufacturing processes and efficiency",
+    bgColor: "bg-blue-800",
   },
 ];
 
 // Main Component
 const RnDSection: React.FC = () => {
   return (
-    <section className="bg-white py-16 sm:py-24">
+    <section id="rnd-section" className="bg-white py-16 sm:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
         {/* Grid Container (Mobile par 1 column, large screen par 2 column) */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          
           {/* 1. Image Column */}
           <div>
             {/* IMPORTANT: 'rd-lab.jpg' ko public folder mein rakhe image se badlein */}
@@ -69,8 +68,9 @@ const RnDSection: React.FC = () => {
             </h2>
             {/* Description */}
             <p className="mt-4 text-lg text-gray-600">
-              Our state-of-the-art research facilities drive pharmaceutical innovation, 
-              developing breakthrough solutions that meet evolving global healthcare needs.
+              Our state-of-the-art research facilities drive pharmaceutical
+              innovation, developing breakthrough solutions that meet evolving
+              global healthcare needs.
             </p>
 
             {/* Features List */}
@@ -78,7 +78,7 @@ const RnDSection: React.FC = () => {
               {features.map((feature) => (
                 <div key={feature.title} className="flex items-start gap-4">
                   {/* Icon */}
-                  <div 
+                  <div
                     className={`flex-shrink-0 w-12 h-12 flex items-center justify-center 
                                 rounded-md text-white ${feature.bgColor}`}
                   >
@@ -86,8 +86,12 @@ const RnDSection: React.FC = () => {
                   </div>
                   {/* Text */}
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900">{feature.title}</h3>
-                    <p className="mt-1 text-base text-gray-600">{feature.description}</p>
+                    <h3 className="text-xl font-bold text-gray-900">
+                      {feature.title}
+                    </h3>
+                    <p className="mt-1 text-base text-gray-600">
+                      {feature.description}
+                    </p>
                   </div>
                 </div>
               ))}

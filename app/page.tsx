@@ -1,3 +1,4 @@
+import CareerComponent from "./components/CareersSection";
 import CertificationsSection from "./components/CertificationsSection";
 import CTASection from "./components/CTASection";
 import GlobalPresenceSection from "./components/GlobalPresenceSection";
@@ -17,7 +18,7 @@ export default function Home() {
     <>
       <Hero />
       <StatsSection />
-      <ProductsSection/>
+      <ProductsSection />
       <RnDSection />
       <ManufacturingSection />
       <CertificationsSection />
@@ -25,6 +26,7 @@ export default function Home() {
       <InsightsSection />
       <PressMediaSection />
       <ResponsibilitySection />
+      <CareerComponent />
       <TestimonialsSection />
       <PartnersSection />
       <CTASection />

@@ -1,22 +1,22 @@
 "use client";
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { 
+import React, { useState } from "react";
+import Link from "next/link";
+import {
   FaClinicMedical, // Logo icon
-  FaChevronDown,    // Dropdown arrow
-  FaBars,           // Mobile menu open
-  FaTimes,          // Mobile menu close
-  FaInfoCircle,     // About icons
+  FaChevronDown, // Dropdown arrow
+  FaBars, // Mobile menu open
+  FaTimes, // Mobile menu close
+  FaInfoCircle, // About icons
   FaUsers,
   FaLandmark,
-  FaPills,          // Product icons
+  FaPills, // Product icons
   FaCapsules,
   FaSyringe,
-  FaNewspaper,      // Newsroom icons
+  FaNewspaper, // Newsroom icons
   FaBroadcastTower,
-  FaRss
-} from 'react-icons/fa';
-import Image from 'next/image';
+  FaRss,
+} from "react-icons/fa";
+import Image from "next/image";
 
 // Dropdown item ke liye type definition
 type DropdownItem = {
@@ -35,43 +35,45 @@ type NavLink = {
 // Navigation links ka data
 const navLinks: NavLink[] = [
   // { name: 'Home', href: '/' },
-  { 
-    name: 'About Us', 
-    href: '#', 
+  {
+    name: "About Us",
+    href: "#",
     dropdown: [
-      { name: 'Our Mission', href: '/about/mission', icon: FaInfoCircle },
-      { name: 'Our Team', href: '/about/team', icon: FaUsers },
-      { name: 'Our History', href: '/about/history', icon: FaLandmark },
-    ]
+      { name: "Our Mission", href: "/", icon: FaInfoCircle },
+      { name: "Our Team", href: "/about/team", icon: FaUsers },
+      { name: "Our History", href: "/about/history", icon: FaLandmark },
+    ],
   },
-  { 
-    name: 'Products', 
-    href: '#', 
+  {
+    name: "Products",
+    href: "#",
     dropdown: [
-      { name: 'Product A', href: '/products/a', icon: FaPills },
-      { name: 'Product B', href: '/products/b', icon: FaCapsules },
-      { name: 'Product C', href: '/products/c', icon: FaSyringe },
-    ]
+      { name: "Product A", href: "/#products", icon: FaPills },
+      { name: "Product B", href: "/#products", icon: FaCapsules },
+      { name: "Product C", href: "/#products", icon: FaSyringe },
+    ],
   },
-  { name: 'Manufacturing & R&D', href: '/manufacturing' },
-  { name: 'Certifications & Compliance', href: '/certifications' },
-  { name: 'Markets Served', href: '/markets' },
-  { 
-    name: 'Newsroom', 
-    href: '#', 
+  { name: "Manufacturing & R&D", href: "/#rnd-section" },
+  { name: "Certifications & Compliance", href: "/#certificate_section" },
+  { name: "Markets Served", href: "/#market_served" },
+  {
+    name: "Newsroom",
+    href: "#",
     dropdown: [
-      { name: 'Press Releases', href: '/news/press', icon: FaNewspaper },
-      { name: 'In the Media', href: '/news/media', icon: FaBroadcastTower },
-      { name: 'Blog', href: '/news/blog', icon: FaRss },
-    ]
+      { name: "Press Releases", href: "/#media_section", icon: FaNewspaper },
+      { name: "In the Media", href: "/#testimonial", icon: FaBroadcastTower },
+      { name: "Blog", href: "/#blogs", icon: FaRss },
+    ],
   },
-  { name: 'Careers', href: '/careers' },
-  { name: 'Contact Us', href: '/contact' },
+  { name: "Careers", href: "/#careers" },
+  { name: "Contact Us", href: "/#contact" },
 ];
 
 const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeMobileDropdown, setActiveMobileDropdown] = useState<string | null>(null);
+  const [activeMobileDropdown, setActiveMobileDropdown] = useState<
+    string | null
+  >(null);
 
   // Mobile dropdown toggle logic
   const toggleMobileDropdown = (name: string) => {
@@ -82,7 +84,6 @@ const Navbar: React.FC = () => {
     <nav className="bg-white shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-2 lg:px-4">
         <div className="flex items-center justify-between h-20">
-          
           {/* 1. Logo */}
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center gap-1">
@@ -91,13 +92,12 @@ const Navbar: React.FC = () => {
                 alt="PharmaGlobal Logo"
                 className="h-20 w-20"
               />
-      
             </Link>
           </div>
 
           {/* 2. Desktop Navigation Links */}
           <div className="hidden md:flex md:items-center md:space-x-6 xxl:space-x-4">
-            {navLinks.map((link) => (
+            {navLinks.map((link) =>
               link.dropdown ? (
                 // Desktop Dropdown (Hover)
                 <div key={link.name} className="relative group">
@@ -106,9 +106,11 @@ const Navbar: React.FC = () => {
                     <FaChevronDown className="h-3 w-3 mt-1" />
                   </button>
                   {/* Dropdown Menu */}
-                  <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-md shadow-lg overflow-hidden
+                  <div
+                    className="absolute top-full left-0 mt-2 w-56 bg-white rounded-md shadow-lg overflow-hidden
                                   opacity-0 invisible group-hover:opacity-100 group-hover:visible 
-                                  transition-all duration-300 transform scale-95 group-hover:scale-100 z-10">
+                                  transition-all duration-300 transform scale-95 group-hover:scale-100 z-10"
+                  >
                     <div className="py-1">
                       {link.dropdown.map((item) => (
                         <Link
@@ -133,13 +135,13 @@ const Navbar: React.FC = () => {
                   {link.name}
                 </Link>
               )
-            ))}
+            )}
           </div>
 
           {/* 3. Desktop "Request a Quote" Button */}
           <div className="hidden md:block">
             <Link
-              href="/request-quote"
+              href="/#contact"
               className="px-5 py-2.5 bg-red-600 text-white font-medium rounded-md shadow-sm
                          hover:bg-red-700 transition-colors duration-300"
             >
@@ -165,13 +167,13 @@ const Navbar: React.FC = () => {
       </div>
 
       {/* 5. Mobile Menu (Sliding) */}
-      <div 
+      <div
         className={`md:hidden absolute top-20 left-0 w-full bg-white shadow-xl
                     transition-all duration-300 ease-in-out overflow-hidden
-                    ${isMobileMenuOpen ? 'max-h-screen py-4' : 'max-h-0 py-0'}`}
+                    ${isMobileMenuOpen ? "max-h-screen py-4" : "max-h-0 py-0"}`}
       >
         <div className="px-4 space-y-2">
-          {navLinks.map((link) => (
+          {navLinks.map((link) =>
             link.dropdown ? (
               // Mobile Dropdown (Clickable)
               <div key={link.name}>
@@ -180,15 +182,23 @@ const Navbar: React.FC = () => {
                   className="w-full flex justify-between items-center py-2 font-medium text-gray-700 hover:text-red-600"
                 >
                   {link.name}
-                  <FaChevronDown 
+                  <FaChevronDown
                     className={`h-4 w-4 transition-transform duration-200 
-                                ${activeMobileDropdown === link.name ? 'rotate-180' : 'rotate-0'}`} 
+                                ${
+                                  activeMobileDropdown === link.name
+                                    ? "rotate-180"
+                                    : "rotate-0"
+                                }`}
                   />
                 </button>
                 {/* Mobile Dropdown Sub-menu */}
-                <div 
+                <div
                   className={`pl-4 overflow-hidden transition-all duration-300 ease-in-out
-                              ${activeMobileDropdown === link.name ? 'max-h-96' : 'max-h-0'}`}
+                              ${
+                                activeMobileDropdown === link.name
+                                  ? "max-h-96"
+                                  : "max-h-0"
+                              }`}
                 >
                   {link.dropdown.map((item) => (
                     <Link
@@ -214,7 +224,7 @@ const Navbar: React.FC = () => {
                 {link.name}
               </Link>
             )
-          ))}
+          )}
 
           {/* Mobile "Request a Quote" Button */}
           <div className="pt-4">

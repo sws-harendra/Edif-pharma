@@ -39,9 +39,9 @@ const navLinks: NavLink[] = [
     name: "About Us",
     href: "#",
     dropdown: [
-      { name: "Our Mission", href: "/", icon: FaInfoCircle },
-      { name: "Our Team", href: "/about/team", icon: FaUsers },
-      { name: "Our History", href: "/about/history", icon: FaLandmark },
+      { name: "Our Mission", href: "/#our_mission", icon: FaInfoCircle },
+      { name: "Our Team", href: "/#team", icon: FaUsers },
+      { name: "Our History", href: "/#history", icon: FaLandmark },
     ],
   },
   {

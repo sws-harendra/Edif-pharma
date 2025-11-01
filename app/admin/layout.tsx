@@ -23,13 +23,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} flex flex-col sm:flex-row`}
-      >
+    <div className={`h-screen overflow-y-hidden flex flex-col sm:flex-row`}>
+      <div className="px-6 py-3">
         <Sidebar />
-        <main className="flex-1">{children}</main>
-      </body>
-    </html>
+      </div>
+      <main className="flex-1 px-1 py-3">{children}</main>
+    </div>
   );
 }

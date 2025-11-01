@@ -16,12 +16,12 @@ export default function EditHeaderForm() {
   const [formData, setFormData] = useState<any>(null);
   const [uploading, setUploading] = useState(false);
 
+  // ✅ Safely deep clone header using structuredClone (built-in)
   useEffect(() => {
-    if (header) setFormData(header);
-  }, [header]);
-
-  useEffect(() => {
-    if (header) setFormData(header);
+    if (header) {
+      const cloned = structuredClone(header); // creates unfrozen editable copy
+      setFormData(cloned);
+    }
   }, [header]);
 
   const handleLogoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,19 +38,43 @@ export default function EditHeaderForm() {
     }
   };
 
+  // ✅ Menu field change handler
   const handleMenuChange = (index: number, key: string, value: any) => {
-    const updatedMenu = [...formData.menuItems];
-    updatedMenu[index][key] = value;
+    const updatedMenu = formData.menuItems.map((item: any, i: number) =>
+      i === index ? { ...item, [key]: value } : item
+    );
     setFormData({ ...formData, menuItems: updatedMenu });
   };
 
+  // ✅ Submenu field change handler
+  const handleSubMenuChange = (
+    menuIndex: number,
+    subIndex: number,
+    key: string,
+    value: any
+  ) => {
+    const updatedMenu = formData.menuItems.map((menu: any, i: number) => {
+      if (i !== menuIndex) return menu;
+      return {
+        ...menu,
+        subMenus: menu.subMenus.map((sub: any, si: number) =>
+          si === subIndex ? { ...sub, [key]: value } : sub
+        ),
+      };
+    });
+    setFormData({ ...formData, menuItems: updatedMenu });
+  };
+
+  // ✅ Reorder handler
   const handleReorder = (from: number, to: number) => {
+    if (to < 0 || to >= formData.menuItems.length) return;
     const updated = [...formData.menuItems];
     const [moved] = updated.splice(from, 1);
     updated.splice(to, 0, moved);
     setFormData({ ...formData, menuItems: updated });
   };
 
+  // ✅ Save changes
   const handleSubmit = async () => {
     if (!formData) return;
     try {
@@ -70,7 +94,7 @@ export default function EditHeaderForm() {
     <div className="max-w-4xl mx-auto p-6 rounded-xl shadow-md space-y-6">
       <h2 className="text-2xl font-semibold mb-4">Edit Header Settings</h2>
 
-      {/* Logo Upload */}
+      {/* ✅ Logo Upload */}
       <div className="space-y-2">
         <label className="block text-sm font-medium text-gray-700">
           Company Logo
@@ -93,7 +117,7 @@ export default function EditHeaderForm() {
         />
       </div>
 
-      {/* Sticky Header */}
+      {/* ✅ Sticky Header Toggle */}
       <div className="flex items-center space-x-2">
         <input
           type="checkbox"
@@ -105,14 +129,14 @@ export default function EditHeaderForm() {
         <label>Enable Sticky Header</label>
       </div>
 
-      {/* Menu Items */}
+      {/* ✅ Menu Items */}
       <div>
         <h3 className="font-semibold mb-2">Menu Items</h3>
         <div className="space-y-3">
           {formData.menuItems.map((item: any, i: number) => (
             <div
               key={item.id}
-              className="border rounded-md p-3 flex flex-col space-y-2 "
+              className="border rounded-md p-3 flex flex-col space-y-2"
             >
               <div className="flex justify-between items-center">
                 <input
@@ -131,21 +155,21 @@ export default function EditHeaderForm() {
                   <button
                     onClick={() => handleReorder(i, i - 1)}
                     disabled={i === 0}
-                    className="text-sm px-2 py-1 border rounded "
+                    className="text-sm px-2 py-1 border rounded"
                   >
                     ↑
                   </button>
                   <button
                     onClick={() => handleReorder(i, i + 1)}
                     disabled={i === formData.menuItems.length - 1}
-                    className="text-sm px-2 py-1 border rounded "
+                    className="text-sm px-2 py-1 border rounded"
                   >
                     ↓
                   </button>
                 </div>
               </div>
 
-              {/* Submenus */}
+              {/* ✅ Submenus */}
               {item.subMenus && item.subMenus.length > 0 && (
                 <div className="pl-4 space-y-1">
                   <p className="text-sm font-medium">Submenus:</p>
@@ -157,21 +181,17 @@ export default function EditHeaderForm() {
                       <input
                         type="text"
                         value={sub.label}
-                        onChange={(e) => {
-                          const newMenus = [...formData.menuItems];
-                          newMenus[i].subMenus[si].label = e.target.value;
-                          setFormData({ ...formData, menuItems: newMenus });
-                        }}
+                        onChange={(e) =>
+                          handleSubMenuChange(i, si, "label", e.target.value)
+                        }
                         className="border rounded px-2 py-1 w-1/3"
                       />
                       <input
                         type="text"
                         value={sub.url}
-                        onChange={(e) => {
-                          const newMenus = [...formData.menuItems];
-                          newMenus[i].subMenus[si].url = e.target.value;
-                          setFormData({ ...formData, menuItems: newMenus });
-                        }}
+                        onChange={(e) =>
+                          handleSubMenuChange(i, si, "url", e.target.value)
+                        }
                         className="border rounded px-2 py-1 w-1/3"
                       />
                     </div>
@@ -183,7 +203,7 @@ export default function EditHeaderForm() {
         </div>
       </div>
 
-      {/* CTA Button */}
+      {/* ✅ CTA Button */}
       <div className="space-y-2">
         <h3 className="font-semibold mb-2">CTA Button</h3>
         <input
@@ -223,6 +243,7 @@ export default function EditHeaderForm() {
         />
       </div>
 
+      {/* ✅ Submit */}
       <button
         onClick={handleSubmit}
         className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"

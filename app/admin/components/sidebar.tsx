@@ -39,13 +39,13 @@ const sidebarLinks: SidebarLink[] = [
   },
   {
     label: "Hero Section",
-    href: "/admin/hero",
+    href: "/admin/hero-section",
     icon: <PiFlagBanner />,
     color: "text-green-500",
   },
   {
     label: "Quick Stats",
-    href: "/admin/stats",
+    href: "/admin/quick-stats",
     icon: <BiStats />,
     color: "text-sky-500",
   },

@@ -2,6 +2,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import headerReducer from "./features/headerSlice";
+import heroReducer from "./features/heroSlice";
 // import courseReducer from "./features/courseSlice";
 // import enrollmentReducer from "./features/enrollmentSlice";
 // import adminReducer from "./features/adminSlice";
@@ -14,6 +15,7 @@ import headerReducer from "./features/headerSlice";
 export const store = configureStore({
   reducer: {
     header: headerReducer,
+    heroSection: heroReducer,
   },
   devTools: process.env.NEXT_PUBLIC_NODE_ENV !== "production", // ✅ disable in prod
 });

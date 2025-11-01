@@ -1,7 +1,10 @@
 "use client";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/app/lib/store/store";
-import { fetchHeroByHeader } from "@/app/lib/store/features/heroSlice";
+import {
+  fetchAllHeroes,
+  fetchHeroByHeader,
+} from "@/app/lib/store/features/heroSlice";
 import { useEffect, useState } from "react";
 import { getMediaElement } from "@/app/utils/getMediaElement";
 import Link from "next/link";
@@ -17,7 +20,7 @@ export default function HeroSection() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    dispatch(fetchHeroByHeader(2)); // Example headerId
+    dispatch(fetchAllHeroes()); // Example headerId
   }, [dispatch]);
 
   if (status === "loading") return <p>Loading...</p>;

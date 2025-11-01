@@ -22,7 +22,7 @@ export default function Home() {
       <Hero />
       <StatsSection />
       <ProductsSection />
-      <RnDSection />
+      {/* <RnDSection /> */}
       <ManufacturingSection />
       <CertificationsSection />
       <GlobalPresenceSection />

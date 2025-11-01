@@ -15,6 +15,8 @@ import { PiFlagBanner } from "react-icons/pi";
 import { BiStats } from "react-icons/bi";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { IoCreate } from "react-icons/io5";
+import { MdCallToAction } from "react-icons/md";
 
 // Type for each sidebar link
 interface SidebarLink {
@@ -51,8 +53,14 @@ const sidebarLinks: SidebarLink[] = [
   },
   {
     label: "Manufacturing Section",
-    href: "/admin/rtl",
-    icon: <Globe />,
+    href: "/admin/manufacturing",
+    icon: <IoCreate />,
+    color: "text-pink-500",
+  },
+  {
+    label: "Main CTA",
+    href: "/admin/final-cta",
+    icon: <MdCallToAction />,
     color: "text-pink-500",
   },
   // Account Section
@@ -64,7 +72,7 @@ const sidebarLinks: SidebarLink[] = [
   },
   {
     label: "Sign In",
-    href: "/admin/signin",
+    href: "/admin/login",
     icon: <LogIn />,
     section: "Account Pages",
   },

@@ -4,7 +4,8 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import headerReducer from "./features/headerSlice";
 import heroReducer from "./features/heroSlice";
 import quickStatsReducer from "./features/quickStatsSlice";
-
+import manufacturingReducer from "./features/manufacturingSlice";
+import finalCtaBannerReducer from "./features/finalCtaBannerSlice";
 // import courseReducer from "./features/courseSlice";
 // import enrollmentReducer from "./features/enrollmentSlice";
 // import adminReducer from "./features/adminSlice";
@@ -19,6 +20,8 @@ export const store = configureStore({
     header: headerReducer,
     heroSection: heroReducer,
     quickstats: quickStatsReducer,
+    manufacturing: manufacturingReducer,
+    finalCtaBanner: finalCtaBannerReducer,
   },
   devTools: process.env.NEXT_PUBLIC_NODE_ENV !== "production", // ✅ disable in prod
 });

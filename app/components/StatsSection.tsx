@@ -1,60 +1,42 @@
-// components/StatsSection.tsx
+"use client";
 
-import React from 'react';
-import { 
-  FaCalendarAlt, // Expertise icon
-  FaBoxOpen,     // Products icon
-  FaGlobeAmericas, // Countries icon
-  FaAward        // Certification icon
-} from 'react-icons/fa';
-
-// Har stat card ke data ke liye type
-type StatCardProps = {
-  icon: React.ElementType;
-  stat: string;
-  title: string;
-  subtitle?: string; // Optional subtitle (WHO-GMP ke liye)
-};
-
-// Stats ka data
-const statsData: StatCardProps[] = [
-  {
-    icon: FaCalendarAlt,
-    stat: '25+',
-    title: 'Years of Expertise',
-  },
-  {
-    icon: FaBoxOpen,
-    stat: '100+',
-    title: 'Products',
-  },
-  {
-    icon: FaGlobeAmericas,
-    stat: '45+',
-    title: 'Countries Served',
-  },
-  {
-    icon: FaAward,
-    stat: 'WHO-GMP',
-    title: 'EU GMP | US FDA Certified',
-  },
-];
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/app/lib/store/store";
+import { fetchAllQuickStats } from "../lib/store/features/quickStatsSlice";
+import IconRenderer from "../utils/iconRenderer";
 
 const StatsSection: React.FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const { quickStats, status } = useSelector(
+    (state: RootState) => state.quickstats
+  );
+
+  useEffect(() => {
+    dispatch(fetchAllQuickStats());
+  }, [dispatch]);
+
+  if (status === "loading") {
+    return <p className="text-center py-10 text-gray-500">Loading stats...</p>;
+  }
+
+  if (!quickStats || quickStats.length === 0) {
+    return <p className="text-center py-10 text-gray-500">No stats found.</p>;
+  }
+
+  const sortedStats = [...quickStats].sort((a, b) => a.order! - b.order!);
+
   return (
     <section className="bg-gray-50 py-16 sm:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Grid container */}
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          
-          {/* Stats data ko map karke har card ko render karna */}
-          {statsData.map((item, index) => (
+          {sortedStats.map((stat) => (
             <StatCard
-              key={index}
-              icon={item.icon}
-              stat={item.stat}
-              title={item.title}
+              key={stat.id}
+              iconUrl={stat.iconUrl!}
+              stat={stat.number}
+              title={stat.title}
+              color={stat.color || "#0F172A"} // default dark blue
             />
           ))}
         </div>
@@ -63,27 +45,38 @@ const StatsSection: React.FC = () => {
   );
 };
 
-// Alag se ek StatCard component (code saaf rakhne ke liye)
-const StatCard: React.FC<StatCardProps> = ({ icon: Icon, stat, title }) => {
+type StatCardProps = {
+  iconUrl?: string;
+  stat: string;
+  title: string;
+  color?: string;
+};
+
+const StatCard: React.FC<StatCardProps> = ({
+  iconUrl,
+  stat,
+  title,
+  color = "#0F172A",
+}) => {
   return (
-    <div className="bg-white border rounded-xl shadow-lg p-8 text-center
-                    transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
-      
-      {/* Icon Wrapper */}
-      <div className="w-20 h-20 bg-blue-900 text-white rounded-full 
-                      flex items-center justify-center mx-auto mb-6">
-        <Icon className="h-10 w-10" />
+    <div
+      className="bg-white border rounded-xl shadow-lg p-8 text-center
+                    transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
+    >
+      <div
+        className="w-20 h-20 text-white rounded-full flex items-center justify-center mx-auto mb-6"
+        style={{ backgroundColor: color }}
+      >
+        {iconUrl ? (
+          <IconRenderer name={iconUrl} className="w-10 h-10" />
+        ) : (
+          <IconRenderer name="CircleHelp" className="w-10 h-10 text-gray-300" />
+        )}
       </div>
-      
-      {/* Stat Number / Text */}
-      <p className="text-4xl font-extrabold text-gray-900">
-        {stat}
-      </p>
-      
-      {/* Title */}
-      <p className="mt-2 text-lg font-medium text-gray-600">
-        {title}
-      </p>
+
+      <p className="text-4xl font-extrabold text-gray-900">{stat}</p>
+
+      <p className="mt-2 text-lg font-medium text-gray-600">{title}</p>
     </div>
   );
 };

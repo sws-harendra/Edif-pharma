@@ -6,6 +6,7 @@ import heroReducer from "./features/heroSlice";
 import quickStatsReducer from "./features/quickStatsSlice";
 import manufacturingReducer from "./features/manufacturingSlice";
 import finalCtaBannerReducer from "./features/finalCtaBannerSlice";
+import csrSustainability from "./features/csrSustainabilitySlice";
 // import courseReducer from "./features/courseSlice";
 // import enrollmentReducer from "./features/enrollmentSlice";
 // import adminReducer from "./features/adminSlice";
@@ -22,6 +23,7 @@ export const store = configureStore({
     quickstats: quickStatsReducer,
     manufacturing: manufacturingReducer,
     finalCtaBanner: finalCtaBannerReducer,
+    csrSustainability: csrSustainability,
   },
   devTools: process.env.NEXT_PUBLIC_NODE_ENV !== "production", // ✅ disable in prod
 });

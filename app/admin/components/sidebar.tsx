@@ -63,6 +63,12 @@ const sidebarLinks: SidebarLink[] = [
     icon: <MdCallToAction />,
     color: "text-pink-500",
   },
+  {
+    label: "CSR / Sustainability",
+    href: "/admin/csr",
+    icon: <MdCallToAction />,
+    color: "text-sky-500",
+  },
   // Account Section
   {
     label: "Profile",
